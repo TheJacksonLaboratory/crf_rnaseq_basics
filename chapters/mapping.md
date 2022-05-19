@@ -51,7 +51,7 @@ STAR \
 
 This command specifies the number of threads available `$cpus`, and the mode in which STAR is being run `genomeGenerate`, which triggers generation of a genome index. It also specifies the directory which will contain the index files `$dir_out`, and the input genomic sequence in FASTA format `$genome_fasta`.
 
-In order to facilitate batch processing on jaxhpc, while automatically allocating a reasonable number of compute threads and RAM, we can use the included sbatch script, `stardb.sh`:
+In order to facilitate batch processing on the JAX HPC cluster, while automatically allocating a reasonable number of compute threads and RAM, we can use the included sbatch script, `stardb.sh`:
 
 ```
 ## make a separate directory in which to do the work for this step:
@@ -107,7 +107,7 @@ STAR \
 
 Here we specify the number of threads `$ncpus`, the directory containing the STAR index `$genome_idx`, as well as the GTF2.2 formatted annotation file specifying the exon locations and their relationship to genes `$genome_gtf`. Setting `--quantMode GeneCounts` instructs SAM to generate an expression estimate for each gene. The format of the mapping file is specified with `--outSAMtype` to be a **BAM** (Binary Alignment Map) formatted file in which there is no sorting of mapping locations by coordinates (another option). We will discuss this format in more detail below. The resulting BAM file has nearby mappings from each read in a read pair (in the case of paired-end sequencing) guaranteed to be adjacent records in the BAM file. This condition is required by some downstream programs, such as `featureCounts`, which we use in the [expression matrix](count_matrix.md) chapter. We also specify the output filename prefix `$prefix_out`, the FASTQ file containing forward reads for one sample `$reads_f` and, if paired-end sequencing was performed, the FASTQ file containing the corresponding reverse reads `$reads_r`.
 
-We can use the included convenience script `star.sh` to do the work on jaxhpc, but first we need to get our inputs together:
+We can use the included convenience script `star.sh` to do the work on the JAX HPC cluster, but first we need to get our inputs together:
 
 ```
 ## make a directory for this step and go there:

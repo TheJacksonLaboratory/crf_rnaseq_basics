@@ -31,7 +31,7 @@ container=/projects/researchit/crf/containers/crf_rnaseq.sif
 singularity exec "$container" fastqc -t $cpus "$fastq"
 ```
 
-In order to facilitate non-interactive, multi-threaded batch execution on jaxhpc, using reasonable numbers of computational threads and RAM, we have included a slurm convenience script `fastqc.sh`, which wraps this process and can be invoked as follows:
+In order to facilitate non-interactive, multi-threaded batch execution on the JAX HPC cluster, using reasonable numbers of computational threads and RAM, we have included a slurm convenience script `fastqc.sh`, which wraps this process and can be invoked as follows:
 
 ```
 sbatch fastqc.sh "$fastq"

@@ -14,9 +14,9 @@
 
 ---
 
-Once we have our feature count matrix (from the previous chapter), we can proceed with the rest of the analysis on jaxhpc or on a laptop. Put `feature_counts.txt` (from `/fastscratch/$USER/rnaseq/feature_counts/`) and `metadata.GSE151185.txt` (from `/fastscratch/$USER/rnaseq/data/`) into a new working folder (perhaps on your local computer) and launch R. 
+Once we have our feature count matrix (from the previous chapter), we can proceed with the rest of the analysis on the JAX HPC cluster or on a laptop. Put `feature_counts.txt` (from `/fastscratch/$USER/rnaseq/feature_counts/`) and `metadata.GSE151185.txt` (from `/fastscratch/$USER/rnaseq/data/`) into a new working folder (perhaps on your local computer) and launch R. 
 
-On jaxhpc you can do the following:
+On the JAX HPC cluster you can do the following:
 
 ```
 ## set up the working directory and link in the input data:
@@ -27,7 +27,7 @@ ln -s /fastscratch/$USER/rnaseq/feature_counts/feature_counts.txt R/
 ln -s /fastscratch/$USER/rnaseq/data/metadata.GSE151185.txt R/
 cd R
 
-## how to get R going (with all the packages you will need) on jaxhpc:
+## how to get R going (with all the packages you will need) on the JAX HPC cluster:
 
 module load singularity
 singularity exec /projects/researchit/crf/containers/crf_rnaseq.sif R
@@ -35,7 +35,7 @@ singularity exec /projects/researchit/crf/containers/crf_rnaseq.sif R
 
 On your laptop, download `feature_counts.txt` and `metadata.GSE151185.txt` into an empty working directory, change into that directory and launch R. Once in R, you may need to change to that working directory using the `setwd("c:/path/to/my/data_directory")` R command. Remember to use the forward slash `/` as your path delimiter in R, even on Windows. You can get help for any R command `cmd()` by entering `?cmd`, for instance, to see how `setwd()` works, you can enter `?setwd`.
 
-Once we have R going on either our laptop or on jaxhpc, we can import our data and begin to explore it:  
+Once we have R going on either our laptop or on the JAX HPC cluster, we can import our data and begin to explore it:  
 
 ```
 ## R: comments start with '#':

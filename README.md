@@ -1,6 +1,6 @@
 # RNA-seq basics
 
-## How to run a basic bulk RNA-seq analysis on jaxhpc
+## How to run a basic bulk RNA-seq analysis on the JAX HPC cluster
 
 ---
 
@@ -64,18 +64,18 @@ In order to understand this tutorial, you should have a **basic** understanding 
 1. common bash commands
 2. writing short bash scripts
 3. common R commands
-4. requesting resources from the SLURM job scheduler on jaxhpc
+4. requesting resources from the SLURM job scheduler on the JAX HPC cluster
 5. running a program installed in a singularity container.
 6. familiarity with Welch's or Student's t-tests.
 7. familiarity with the concept of a statistical distribution.
 
 In addition, in order to understand the three-group and multivariate analyses sections in the `edgeR` and `DESeq2` chapters, familiarity with basic linear regression would be very helpful.
 
-The scripts in this repository for steps 1 through 5 (up to and including expression matrix generation) assume you have at least 16 threads (or virtual CPUs), 64 GiB of RAM, and 200 GB of available storage on a compute node running some flavor of Linux. Steps 6 through 8 can be carried out on jaxhpc but can (unless your data are really big) more conveniently carried out on your laptop.
+The scripts in this repository for steps 1 through 5 (up to and including expression matrix generation) assume you have at least 16 threads (or virtual CPUs), 64 GiB of RAM, and 200 GB of available storage on a compute node running some flavor of Linux. Steps 6 through 8 can be carried out on the JAX HPC cluster but can (unless your data are really big) more conveniently carried out on your laptop.
 
 For convenience, we have included the the expression matrix `feature_counts.txt` and the metadata file `metadata.GSE151185.txt` in the `data` subdirectory of this repo. You can use these two files to skip steps 1 through 5, and proceed directly to steps 6 through 8.
 
-On jaxhpc, you can download this repository (including the scripts) into a directory (say, for instance `opt`) under your `/home` directory by changing to the parent directory and entering:
+On the JAX HPC cluster, you can download this repository (including the scripts) into a directory (say, for instance `opt`) under your `/home` directory by changing to the parent directory and entering:
 
 ```
 mkdir -p ~/opt
@@ -85,7 +85,7 @@ git clone https://github.com/TheJacksonLaboratory/crf_rnaseq_basics.git
 
 This will create the subdirectory `~/opt/crf_rnaseq_basics`, containing the contents of this repository.
 
-On jaxhpc, the dependencies for all the steps (including R) are present in the Singularity container:
+On the JAX HPC cluster, the dependencies for all the steps (including R) are present in the Singularity container:
 
 ```
 /projects/researchit/crf/containers/crf_rnaseq.sif
@@ -128,7 +128,7 @@ BiocManager::install("DESeq2")
 
 The experiment we will be looking at was conducted in the model organism *Saccharomyces cerevisiae* (baker's/ale yeast). We picked this organism because the datasets and associated genome are smaller than typical for vertebrates, and therefore require fewer resources for demonstrating computational procedures.
 
-These test data are derived from [GEO](https://www.ncbi.nlm.nih.gov/geo/) dataset [GSE151185](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE151185). We have made the sequence read files available on jaxhpc in the `/projects/researchit/crf/data/rnaseq/GSE151185` directory. This folder also includes a metadata file we made called `metadata.GSE151185.txt` which describes each biological sample and connects it to the corresponding sequencing read file. We describe the metadata file in more detail, as well as how to copy and setup the data for analysis in the chapter on [Setting up inputs](chapters/inputs.md).
+These test data are derived from [GEO](https://www.ncbi.nlm.nih.gov/geo/) dataset [GSE151185](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE151185). We have made the sequence read files available on the JAX HPC cluster in the `/projects/researchit/crf/data/rnaseq/GSE151185` directory. This folder also includes a metadata file we made called `metadata.GSE151185.txt` which describes each biological sample and connects it to the corresponding sequencing read file. We describe the metadata file in more detail, as well as how to copy and setup the data for analysis in the chapter on [Setting up inputs](chapters/inputs.md).
 
 These data were generated for a [study](https://dx.doi.org/10.1074%2Fjbc.RA120.015402) looking at the mechanisms by which caloric restriction increases longevity in yeast. Caloric restriction has been shown to extend the average lifespan of virtually every species of eukaryotic model organism reared in the laboratory (a situation in which calories tend to be much more readily available than the natural environment). The investigators noted that conditioned media (media collected from growing cultures by filtering out the cells) from calorie restricted cultures at stationary phase was able to extend the 'chronological longevity' of fresh yeast cultures, even when supplemented to reach normal calorie levels. This suggested a factor released from calorie restricted yeast was able to increase longevity in the absence of caloric restriction. Chronological longevity refers to the amount of time that yeast continue to be able to proliferate after entering stationary phase. This is tested by taking samples from stationary phase cultures at different timepoints and seeing how well they grow when transferred to fresh media.
 
